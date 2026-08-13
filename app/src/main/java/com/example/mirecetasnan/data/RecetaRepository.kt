@@ -21,5 +21,8 @@ class RecetaRepository(context: Context) {
 
     suspend fun guardarRecetas(recetas: List<Receta>) {
         dao.insertarRecetas(recetas)
+        suspend fun cambiarFavorito(recetaId: Int) {
+            dao.cambiarFavorito(recetaId)
+        }
     }
 }

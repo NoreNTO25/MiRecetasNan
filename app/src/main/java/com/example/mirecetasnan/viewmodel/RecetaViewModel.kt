@@ -32,24 +32,29 @@ class RecetaViewModel(application: Application) : AndroidViewModel(application) 
 
     private val _error = MutableStateFlow<String?>(null)
     val error: StateFlow<String?> = _error
+fun cargarRecetas() {
+    viewModelScope.launch {
+        _cargando.value = true
+        _error.value = null
 
-    fun cargarRecetas() {
-        viewModelScope.launch {
-            _cargando.value = true
-            _error.value = null
+        try {
+            val resultado = repository.obtenerRecetas()
 
-            try {
-                val resultado = repository.obtenerRecetas()
-
-                if (resultado.isNotEmpty()) {
-                    _recetas.value = resultado
-                    repository.guardarRecetas(resultado)
-                }
-            } catch (e: Exception) {
-                _error.value = "No se pudo conectar con Internet"
-            } finally {
-                _cargando.value = false
+            if (resultado.isNotEmpty()) {
+                _recetas.value = resultado
+                repository.guardarRecetas(resultado)
             }
+        } catch (e: Exception) {
+            _error.value = "No se pudo conectar con Internet"
+        } finally {
+            _cargando.value = false
         }
     }
+}
+
+fun cambiarFavorito(recetaId: Int) {
+    viewModelScope.launch {
+        repository.cambiarFavorito(recetaId)
+    }
+}
 }

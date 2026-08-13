@@ -10,5 +10,6 @@ data class Receta(
     val nombre: String,
     val descripcion: String,
     val ingredientes: String,
-    val preparacion: String
+    val preparacion: String,
+    val favorita: Boolean= false
 )
