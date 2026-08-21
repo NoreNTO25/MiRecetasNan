@@ -14,7 +14,7 @@ interface RecetaDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertarRecetas(recetas: List<Receta>)
+
     @Query("UPDATE recetas SET favorita = NOT favorita WHERE id = :recetaId")
     suspend fun cambiarFavorito(recetaId: Int)
 }
-
