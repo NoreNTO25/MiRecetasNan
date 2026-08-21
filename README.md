@@ -18,3 +18,5 @@ navegación entre pantallas.
 
 
 Realizado por :Nancy t.
+DIAGRAMA DE ARQUITECTURA
+![Arquitectura](mireceta.jpg)
