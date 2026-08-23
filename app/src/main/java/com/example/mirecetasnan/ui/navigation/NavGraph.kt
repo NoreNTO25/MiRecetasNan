@@ -46,8 +46,7 @@ fun NavGraph(viewModel: RecetaViewModel) {
         // ⚙️ Pantalla de ajustes
         composable(route = "ajustes") {
             AjustesScreen(
-                navController = navController  // ← ESTO YA NO DA ERROR
-            )
+                navController = navController
         }
     }
 }
