@@ -20,3 +20,5 @@ navegación entre pantallas.
 Realizado por :Nancy t.
 DIAGRAMA DE ARQUITECTURA
 ![Arquitectura](mireceta.jpg)
+capturas imagenes
+![Captura de mi app](./Captura%20de%20pantalla%202026-08-23%20125052.png)
