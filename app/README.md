@@ -18,3 +18,4 @@ navegacion entre pantallas.
 
 
 Realizado por :Nancy t.
+Diagrama

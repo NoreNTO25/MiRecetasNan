@@ -1,44 +1,53 @@
-package com.example.mirecetasnan.ui.navigation
+package com.example.mirecetasnan
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.mirecetasnan.data.Receta
+import androidx.navigation.navArgument
 import com.example.mirecetasnan.ui.screens.AjustesScreen
-import com.example.mirecetasnan.ui.screens.DetalleRecetaScreen
-import com.example.mirecetasnan.ui.screens.ListaRecetasScreen
+import com.example.mirecetasnan.viewmodel.RecetaViewModel
 
 @Composable
-fun NavGraph() {
-
+fun NavGraph(viewModel: RecetaViewModel) {
     val navController = rememberNavController()
-
-    val receta = Receta(
-        id = 1,
-        nombre = "Arroz con pollo",
-        descripcion = "Receta de toda fiesta",
-        ingredientes = "Arroz, pollo, verduras, salsa china y sal al gusto",
-        preparacion = "Cocinar todos los ingredientes y sofreír las verduras."
-    )
 
     NavHost(
         navController = navController,
         startDestination = "lista"
     ) {
-
-        composable("lista") {
-            ListaRecetasScreen()
+        // 🏠 Pantalla de lista
+        composable(route = "lista") {
+            ListaRecetasScreen(
+                navController = navController,
+                viewModel = viewModel
+            )
         }
 
-        composable("detalle") {
-            DetalleRecetaScreen(receta = receta)
+        // 📄 Pantalla de detalle
+        composable(
+            route = "detalle/{recetaId}",
+            arguments = listOf(
+                navArgument("recetaId") { type = NavType.IntType }
+            )
+        ) { backStackEntry ->
+            val recetaId = backStackEntry.arguments?.getInt("recetaId") ?: 0
+            viewModel.cargarRecetaPorId(recetaId)
+            val receta by viewModel.recetaSeleccionada.collectAsState()
+            DetalleRecetaScreen(
+                receta = receta,
+                navController = navController
+            )
         }
 
-        composable("ajustes") {
-            AjustesScreen()
+        // ⚙️ Pantalla de ajustes
+        composable(route = "ajustes") {
+            AjustesScreen(
+                navController = navController  // ← ESTO YA NO DA ERROR
+            )
         }
     }
 }
-
-

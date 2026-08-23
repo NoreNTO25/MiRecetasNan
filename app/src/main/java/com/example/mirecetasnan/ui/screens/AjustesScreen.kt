@@ -1,7 +1,6 @@
 package com.example.mirecetasnan.ui.screens
 
 import android.Manifest
-import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.provider.MediaStore
@@ -24,11 +23,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
+import androidx.navigation.NavHostController
 import com.example.mirecetasnan.data.UserPreferences
 import kotlinx.coroutines.launch
 
 @Composable
-fun AjustesScreen() {
+fun AjustesScreen(navController: NavHostController) {
 
     val context = LocalContext.current
 

@@ -7,11 +7,10 @@ import androidx.room.RoomDatabase
 
 @Database(
     entities = [Receta::class],
-    version = 3,
+    version = 1,
     exportSchema = false
 )
 abstract class RecetaDatabase : RoomDatabase() {
-
     abstract fun recetaDao(): RecetaDao
 
     companion object {
@@ -24,12 +23,12 @@ abstract class RecetaDatabase : RoomDatabase() {
                     context.applicationContext,
                     RecetaDatabase::class.java,
                     "recetas_database"
-                ).build()
-
+                )
+                    .fallbackToDestructiveMigration()  // ← AGREGADO
+                    .build()
                 INSTANCE = instance
                 instance
             }
         }
     }
 }
-
