@@ -47,6 +47,7 @@ fun NavGraph(viewModel: RecetaViewModel) {
         composable(route = "ajustes") {
             AjustesScreen(
                 navController = navController
+            )
         }
     }
 }
